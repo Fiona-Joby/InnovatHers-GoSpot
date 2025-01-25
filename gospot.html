@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoSpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a5acd;
+            --secondary-color: #4ecdc4;
+            --background-light: #f4f6f9;
+            --text-dark: #2c3e50;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .sidebar .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .gradient-background {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .search-filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-grid input,
+        .filter-grid select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-grid input:focus,
+        .filter-grid select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.1);
+        }
+
+        .venues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .venue-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            border-left: 5px solid transparent;
+        }
+
+        .venue-card:hover {
+            transform: translateY(-10px);
+            border-left-color: var(--primary-color);
+        }
+
+        .venue-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .venue-rating {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .venue-crowd {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        .crowd-low { background-color: #28a745; color: white; }
+        .crowd-moderate { background-color: #ffc107; color: white; }
+        .crowd-high { background-color: #dc3545; color: white; }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: space-around;
+                position: relative;
+                box-shadow: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Login Page Styles */
+        .login-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            max-width: 400px;
+            margin: 50px auto;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Profile Page Styles */
+        .profile-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        .profile-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-container p {
+            margin-bottom: 10px;
+        }
+
+        .profile-container .button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .profile-container .button:hover {
+            background-color: var(--secondary-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">GoSpot</div>
+        <a href="#" id="homeLink">Home</a>
+        <a href="#" id="loginLink">Login</a>
+        <a href="#" id="spotsLink">Nearby Spots</a>
+        <a href="#" id="profileLink">Profile</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+
+        <!-- Home Page (Default View) -->
+        <div id="homePage">
+            <section class="gradient-background header">
+                <div class="container">
+                    <h1>GoSpot</h1>
+                    <p>Discover new hangout spots nearby, check their crowd status, and find the perfect spot for any occasion!</p>
+                </div>
+            </section>
+
+            <section class="search-filter-section">
+                <div class="container">
+                    <h2>Search & Filter Hangout Spots</h2>
+                    <div class="filter-grid">
+                        <input type="text" placeholder="Search for a spot" id="search">
+                        <select id="location">
+                            <option value="">Select Location</option>
+                            <option value="campus">Campus</option>
+                            <option value="downtown">Downtown</option>
+                            <option value="city-center">City Center</option>
+                        </select>
+                        <select id="rush-hours">
+                            <option value="">Select Rush Hour</option>
+                            <option value="low">Low Rush</option>
+                            <option value="moderate">Moderate Rush</option>
+                            <option value="high">High Rush</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="venues-grid">
+                <div class="venue-card">
+                    <h2>Café Lush</h2>
+                    <p>Cozy spot with great coffee and pastries.</p>
+                    <p class="venue-rating">★★★★☆</p>
+                    <span class="venue-crowd crowd-moderate">Moderate Crowd</span>
+                </div>
+                <div class="venue-card">
+                    <h2>The Study Hub</h2>
+                    <p>A quiet place for studying and group work.</p>
+                    <p class="venue-rating">★★★★★</p>
+                    <span class="venue-crowd crowd-low">Low Crowd</span>
+                </div>
+                <div class="venue-card">
+                    <h2>The Vibe Lounge</h2>
+                    <p>Chill environment for socializing and hanging out.</p>
+                    <p class="venue-rating">★★★☆☆</p>
+                    <span class="venue-crowd crowd-high">High Crowd</span>
+                </div>
+            </section>
+        </div>
+
+        <!-- Login Page -->
+        <div id="loginPage" style="display: none;">
+            <div class="login-form">
+                <h2>Login</h2>
+                <input type="email" placeholder="Email" id="email">
+                <input type="password" placeholder="Password" id="password">
+                <button onclick="loginUser()">Login</button>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profilePage" style="display: none;">
+            <div class="profile-container">
+                <h2>Your Profile</h2>
+                <p>Name: John Doe</p>
+                <p>Email: johndoe@example.com</p>
+                <p>Location: Downtown</p>
+                <button class="button" onclick="editProfile()">Edit Profile</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Navigation Functions
+        document.getElementById('homeLink').addEventListener('click', function() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('profilePage').style.display = 'none';
+        });
+
+        document.getElementById('loginLink').addEventListener('click', function() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'block';
+            document.getElementById('profilePage').style.display = 'none';
+        });
+
+        document.getElementById('profileLink').addEventListener('click', function() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('profilePage').style.display = 'block';
+        });
+
+        // Dummy login function (for demonstration)
+        function loginUser() {
+            alert('Logged in successfully!');
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('profilePage').style.display = 'block';
+        }
+
+        function editProfile() {
+            alert('Editing profile...');
+        }
+    </script>
+
+</body>
+</html>
