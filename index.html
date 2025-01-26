@@ -43,6 +43,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            z-index: 1000; /* Ensure sidebar is on top */
         }
 
         .sidebar a {
@@ -130,6 +131,21 @@
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.1);
+        }
+
+        .search-button {
+            padding: 10px; /* Adjusted padding for smaller button */
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: var(--secondary-color);
         }
 
         .venues-grid {
@@ -245,6 +261,7 @@
             box-shadow: var(--card-shadow);
             max-width: 600px;
             margin: 50px auto;
+            display: none; /* Hide by default */
         }
 
         .profile-container h2 {
@@ -291,7 +308,7 @@
             <section class="gradient-background header">
                 <div class="container">
                     <h1>GoSpot</h1>
-                    <p>Discover new hangout spots nearby, check their crowd status, and find the perfect spot for any occasion!</p>
+                    <p> Discover new hangout spots nearby, check their crowd status, and find the perfect spot for any occasion!</p>
                 </div>
             </section>
 
@@ -312,6 +329,7 @@
                             <option value="moderate">Moderate Rush</option>
                             <option value="high">High Rush</option>
                         </select>
+                        <button class="search-button" onclick="searchSpots()">Search</button>
                     </div>
                 </div>
             </section>
@@ -344,19 +362,60 @@
                 <h2>Login</h2>
                 <input type="email" placeholder="Email" id="email">
                 <input type="password" placeholder="Password" id="password">
-                <button onclick="loginUser()">Login</button>
+                <button onclick="loginUser   ()">Login</button>
+                <p style="text-align: center;">Don't have an account? <a href="#" id="toSignupLink">Sign Up</a></p>
             </div>
         </div>
 
         <!-- Profile Page -->
-        <div id="profilePage" style="display: none;">
-            <div class="profile-container">
-                <h2>Your Profile</h2>
-                <p>Name: John Doe</p>
-                <p>Email: johndoe@example.com</p>
-                <p>Location: Downtown</p>
-                <button class="button" onclick="editProfile()">Edit Profile</button>
-            </div>
+        <div id="profilePage" class="profile-container">
+            <h2>Your Profile</h2>
+            <p>Name: <span id="profileName">Guest</span></p>
+            <p>Email: <span id="profileEmail">Not Logged In</span></p>
+            <p>Location: <span id="profileLocation">N/A</span></p>
+            <button class="button" onclick="editProfile()">Edit Profile</button>
+        </div>
+
+        <!-- Nearby Spots Page -->
+        <div id="nearbySpotsPage" style="display: none;">
+            <section style="background-color: var(--secondary-color); color: white; padding: 40px 20px;">
+                <div class="container">
+                    <h1 style="font-size: 2.5rem; font-weight: 600;">Discover Nearby Spots</h1>
+                    <p style="font-weight: 300; opacity: 0.9;">Find the best hangout spots around you and enjoy your time!</p>
+                </div>
+            </section>
+            <section class="venues-grid">
+                <div class="venue-card">
+                    <h2>Café Lush</h2>
+                    <p>Cozy spot with great coffee and pastries.</p>
+                    <p class="venue-rating">★★★★☆</p>
+                    <span class="venue-crowd crowd-moderate">Moderate Crowd</span>
+                </div>
+                <div class="venue-card">
+                    <h2>The Study Hub</h2>
+                    <p>A quiet place for studying and group work.</p>
+                    <p class="venue-rating">★★★★★</p>
+                    <span class="venue-crowd crowd-low">Low Crowd</span>
+                </div>
+                <div class="venue-card">
+                    <h2>The Vibe Lounge</h2>
+                    <p>Chill environment for socializing and hanging out.</p>
+                    <p class="venue-rating">★★★☆☆</p>
+                    <span class="venue-crowd crowd-high">High Crowd</span>
+                </div>
+                <div class="venue-card">
+                    <h2>Parkside Café</h2>
+                    <p>Relaxing spot with outdoor seating.</p>
+                    <p class="venue-rating">★★★★☆</p>
+                    <span class="venue-crowd crowd-low">Low Crowd</span>
+                </div>
+                <div class="venue-card">
+                    <h2>Downtown Diner</h2>
+                    <p>Classic diner with a vibrant atmosphere.</p>
+                    <p class="venue-rating">★★★☆☆</p>
+                    <span class="venue-crowd crowd-moderate">Moderate Crowd</span>
+                </div>
+            </section>
         </div>
 
     </div>
@@ -366,26 +425,49 @@
         document.getElementById('homeLink').addEventListener('click', function() {
             document.getElementById('homePage').style.display = 'block';
             document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('nearbySpotsPage').style.display = 'none';
             document.getElementById('profilePage').style.display = 'none';
         });
 
         document.getElementById('loginLink').addEventListener('click', function() {
             document.getElementById('homePage').style.display = 'none';
             document.getElementById('loginPage').style.display = 'block';
+            document.getElementById('nearbySpotsPage').style.display = 'none';
+            document.getElementById('profilePage').style.display = 'none';
+        });
+
+        document.getElementById('spotsLink').addEventListener('click', function() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('nearbySpotsPage').style.display = 'block';
             document.getElementById('profilePage').style.display = 'none';
         });
 
         document.getElementById('profileLink').addEventListener('click', function() {
             document.getElementById('homePage').style.display = 'none';
             document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('nearbySpotsPage').style.display = 'none';
             document.getElementById('profilePage').style.display = 'block';
         });
 
+        // Link to switch from login to signup
+        document.getElementById('toSignupLink').addEventListener('click', function() {
+            alert('Signup functionality is not available.');
+        });
+
         // Dummy login function (for demonstration)
-        function loginUser() {
+        function loginUser   () {
             alert('Logged in successfully!');
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('profilePage').style.display = 'block';
+            document.getElementById('profileName').innerText = document.getElementById('email').value; // Set profile name to email
+            document.getElementById('profileEmail').innerText = document.getElementById('email').value; // Set profile email
+        }
+
+        function searchSpots() {
+            const searchQuery = document.getElementById('search').value;
+            alert('Searching for: ' + searchQuery);
+            // Implement search functionality here
         }
 
         function editProfile() {
