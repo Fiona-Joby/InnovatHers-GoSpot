@@ -27,21 +27,18 @@ Frameworks used: None (Vanilla JS for functionality)
 Libraries used: None
 Tools used: VS Code, GitHub, Browser
 
-For Hardware:
-
-[List main components]
-[List specifications]
-[List tools required]
 Implementation
 For Software:
 
 Installation
 1. Clone the repository:
    bash
+   
    git clone https://github.com/fiona-joby/InnovatHers-GoSpot.git
    
-2. Navigate into the project folder:
+3. Navigate into the project folder:
    bash
+   
    cd InnovatHers-GoSpot
 
 
