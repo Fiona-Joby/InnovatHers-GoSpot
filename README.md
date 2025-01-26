@@ -89,30 +89,17 @@ Diagrams
 
 Add caption explaining your workflow
 
-For Hardware:
 
-Schematic & Circuit
-![Circuit](Add your circuit diagram here) Add caption explaining connections
+InnovatHers
+![WhatsApp Image 2025-01-26 at 10 33 23_992ff844](https://github.com/user-attachments/assets/9b4ad399-df53-4e9b-b11d-ad92e7476d9f)
 
-![Schematic](Add your schematic diagram here) Add caption explaining the schematic
-
-Build Photos
-![Team](Add photo of your team here)
-
-![Components](Add photo of your components here) List out all components shown
-
-![Build](Add photos of build process here) Explain the build steps
-
-![Final](Add photo of final product here) Explain the final build
 
 Project Demo
 Video
 [Add your demo video link here] Explain what the video demonstrates
 
-Additional Demos
-[Add any extra demo materials/links]
 
 Team Contributions
-[Name 1]: [Specific contributions]
-[Name 2]: [Specific contributions]
-[Name 3]: [Specific contributions]
+Aamira Sageer: Design
+Arha Vijitha Suresh: Code
+Fiona Joby Varghese:  Integrater
