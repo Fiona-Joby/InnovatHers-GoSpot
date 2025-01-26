@@ -7,7 +7,9 @@ Team Name: InnovatHers
 Team Members
 
 Member 1: Aamira Sageer - Saintgits College of Engineering
+
 Member 2: Arha Vijitha Suresh - Saintgits College of Engineering
+
 Member 3: Fiona Joby Varghese - Saintgits College of Engineering
 
 
@@ -100,6 +102,9 @@ Video
 
 
 Team Contributions
+
 Aamira Sageer: Design
+
 Arha Vijitha Suresh: Code
+
 Fiona Joby Varghese:  Integrater
